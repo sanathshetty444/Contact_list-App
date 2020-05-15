@@ -13,7 +13,7 @@ app.set('views',path.join(__dirname,'views'));
 app.use(express.urlencoded({
     extended:true
 }));
-app.use(express.static('views'));
+app.use(express.static('./assets'));
 //middleware
 // app.use(function(req,res,next){
     
