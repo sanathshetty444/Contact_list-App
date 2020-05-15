@@ -48,32 +48,39 @@ app.get('/',function(req,res){
     
 });
 
-app.post('/contact',function(req,res){
+app.post('/contact', async function(req,res){
     // contact.push(req.body);
     // res.redirect('/');
-    Contact.create({
+    let contact=await Contact.create({
         name:req.body.name,
         password:req.body.password
-    },function(err,newcontact){
-        if(err)
-        {
-            console.log("error in creating contact")
-            return;
-
-        }
-        console.log('********',newcontact);
+    });
+    if(req.xhr){
+        return res.status(200).json({
+            data:
+            {
+                contact:contact
+            },message:"contact added"
+        })
+    }
         return res.redirect('/');
-    })
+    
 });
-app.get('/delete-contact',function(req,res){
+app.get('/delete-contact',async function(req,res){
    console.log(req.query.id)
    let id =req.query.id;
-    Contact.findByIdAndDelete(id,function(err){
-        if(err){
-            return;
-        }
+    let contact=await Contact.findByIdAndDelete(id)
+        
+    if(req.xhr){
+        return res.status(200).json({
+            data:
+            {
+                contact:id
+            },message:"contact deleted"
+        })
+    }
         return res.redirect('/');
-    });
+    
    
 
 })

@@ -5,7 +5,8 @@
 
         </title>
         <script src="https://kit.fontawesome.com/fb2f2264aa.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet"  href="home.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet"  href="/css/home.css">
      </head>
     <body >
         <i class="far fa-address-card"></i> <h1 >Contacts</h1>
@@ -13,11 +14,11 @@
         <div id ="outer" >
         
         <% for(let i of lol){%>
-        <div id ="inner" >
-           <a href="/delete-contact/?id=<%= i._id %>" <i class="far fa-window-close"></i></a>
+        <div id ="inner-<%= i._id %>"  >
+           <a class="delete-contact-button" href="/delete-contact/?id=<%= i._id %>" ><i class="far fa-window-close"></i></a>
              <%=i.name%> <br>
             <%=i.password%> 
-            <%=i._id%> 
+            
         </div>
         <br>
         <br>
@@ -25,7 +26,7 @@
             
         <%}%> 
     
-        <form action="/contact" method="POST">
+        <form id="post-submit" action="/contact" method="POST">
             <input type="text" name="name" placeholder="name">
             <input type="text" name="password" placeholder="contact number">
             <button type="submit">submit</button>
@@ -33,5 +34,6 @@
         
         
     </div>
+    <script src="/js/home.js"></script>
     </body>
 </html>
